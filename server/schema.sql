@@ -1,13 +1,25 @@
+drop database chat;
 CREATE DATABASE chat;
 
 USE chat;
 
+CREATE TABLE users (
+  id INT(11) auto_increment,
+  username VARCHAR(25) not null unique,
+  PRIMARY KEY (id)
+  );
+
 CREATE TABLE messages (
   /* Describe your table here.*/
+  id INT(11) auto_increment,
+  msg_text VARCHAR(255),
+  user_id INT(11),
+  roomname VARCHAR(255),
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  PRIMARY KEY (id)
 );
 
 /* Create other tables and define schemas for them here! */
-
 
 
 
