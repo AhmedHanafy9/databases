@@ -30,7 +30,7 @@ describe('Persistent Node Chat Server', () => {
   });
 
   it('Should insert posted messages to the DB', (done) => {
-    const username = 'Charmander';
+    const username = 'Charizard';
     const message = 'In mercy name, three days is all I need.';
     const roomname = 'Hello';
     // Create a user on the chat server database.
@@ -72,6 +72,7 @@ describe('Persistent Node Chat Server', () => {
     const queryArgs = [message, 1, roomname];
     /* TODO: The exact query string and query args to use here
      * depend on the schema you design, so I'll leave them up to you. */
+    dbConnection.query('truncate messages', done);
     dbConnection.query(queryString, queryArgs, (err) => {
       if (err) {
         throw err;
@@ -80,7 +81,6 @@ describe('Persistent Node Chat Server', () => {
       axios.get(`${API_URL}/messages`)
         .then((response) => {
           const messageLog = response.data;
-          console.log('HIHIHIH', response);
           expect(messageLog[0].msg_text).toEqual(message);
           expect(messageLog[0].roomname).toEqual(roomname);
           done();

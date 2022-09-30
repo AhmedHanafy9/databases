@@ -1,11 +1,11 @@
-drop database chat;
+drop database if exists chat;
 CREATE DATABASE chat;
 
 USE chat;
 
 CREATE TABLE users (
   id INT(11) auto_increment,
-  username VARCHAR(25) not null unique,
+  username VARCHAR(25) not null,
   PRIMARY KEY (id)
   );
 
